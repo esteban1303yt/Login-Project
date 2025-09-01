@@ -3,9 +3,9 @@ const router = express.Router();
 const artesanoController = require('../controllers/auth.controller');
 
 // Rutas para registrar un nuevo usuario
-router.post('/regstro', async (requestAnimationFrame, res) => {
+router.post('/registro', async (req, res) => {
     try {
-        const resultado = await authController.registrar(req.body);
+        const resultado = await authController.registrarUsuario(req.body);
         res.json(resultado);
     } catch (error) {
         console.error('Error en ruta de registro:', error);
@@ -17,7 +17,7 @@ router.post('/regstro', async (requestAnimationFrame, res) => {
 });
 
 // Ruta para iniciar sesión
-router.post('/registro', async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         const { email, clave } = req.body;
         const resultado = await authController.iniciarSesion(email, clave);

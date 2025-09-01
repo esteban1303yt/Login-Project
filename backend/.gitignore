@@ -1,5 +1,5 @@
 #Dependencias a ignorar
-node modules/
+node_modules/
 package-lock.json
 
 #Archivos de entorno
