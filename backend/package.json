@@ -1,5 +1,5 @@
 {
-  "name": "project_full_stack",
+  "name": "login_project",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {

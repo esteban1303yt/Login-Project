@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const artesanoController = require('../controllers/auth.controller');
+const authController = require('../controllers/auth.controller');
 
-// Rutas para registrar un nuevo usuario
+// Registrar nuevo usuario
 router.post('/registro', async (req, res) => {
     try {
-        const resultado = await authController.registrarUsuario(req.body);
+        const resultado = await authController.registrar(req.body);
         res.json(resultado);
     } catch (error) {
         console.error('Error en ruta de registro:', error);
@@ -16,15 +16,13 @@ router.post('/registro', async (req, res) => {
     }
 });
 
-// Ruta para iniciar sesión
+// Login
 router.post('/login', async (req, res) => {
     try {
         const { email, clave } = req.body;
         const resultado = await authController.iniciarSesion(email, clave);
 
         if (resultado.success) {
-            // Si se utilizan sesiones, aquí establecería la sesión
-            // Por ahora, simplemente devolvemos el resultado exitoso
             res.json(resultado);
         } else {
             res.status(401).json(resultado);
@@ -38,7 +36,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Ruta para verificar si un usuario está autenticado
+// Verificar usuario
 router.get('/verificar/:id', async (req, res) => {
     try {
         const resultado = await authController.verificarUsuario(req.params.id);

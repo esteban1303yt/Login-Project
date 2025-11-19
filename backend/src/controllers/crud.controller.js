@@ -31,7 +31,7 @@ class CrudController {
     async actualizar(tabla, idCampo, id, data) {
         try {
             const [resultado] = await db.query(`UPDATE ?? SET ? WHERE ?? = ?`, [tabla, idCampo, id, data]);
-            if (resultado.affectedRows === 0 ) {
+            if (resultado.affectedRows === 0) {
                 throw new Error('Registro no encontrado')
             }
             return await this.obtenerUno(tabla, idCampo, id);
@@ -43,7 +43,7 @@ class CrudController {
     async eliminar(tabla, idCampo, id) {
         try {
             const [resultado] = await db.query(`DELETE FROM ?? WHERE ?? = ?`, [tabla, idCampo, id]);
-            if (resultado.affectedRows === 0 ) {
+            if (resultado.affectedRows === 0) {
                 throw new Error('Registro no encontrado')
             }
             return { ...data, id: resultado.insertId };

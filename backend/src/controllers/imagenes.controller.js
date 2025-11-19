@@ -8,7 +8,7 @@ class ImagenesController {
             const [registro] = await db.query(`SELECT * FROM ?? = ?`, [tabla, campoId, id]);
 
             if (registro.length === 0) {
-                return { error: 'No se encontró el registro con el ID proporcionado.'};
+                return { error: 'No se encontró el registro con el ID proporcionado.' };
             }
 
             // Convertir imagen de base64 a binario
@@ -20,7 +20,7 @@ class ImagenesController {
 
             if (result.affectedRows > 0) {
                 return { message: 'Imagen actualizada correctamente.' };
-            }  else {
+            } else {
                 return { error: 'Error al actualizar la imagen' };
             }
         } catch (error) {
@@ -31,21 +31,21 @@ class ImagenesController {
 
     // Obtener la imagen en base64
     async obtenerImagen(tabla, campoId, id) {
-            try {
+        try {
             //Consultar la imagen en binario de la base de datos
             const [rows] = await db.query(`SELECT imagen FROM ?? WHERE ?? = ?`, [tabla, campoId, id]);
 
             if (rows.length === 0) {
-                return { error: 'Registro no encontrado'};
+                return { error: 'Registro no encontrado' };
             }
 
             if (!rows[0].imagen) {
-                return { error: 'No hay imagen asociada a este registro'};
+                return { error: 'No hay imagen asociada a este registro' };
             }
 
             // Convertir imagen a binaria
             const imagenBase64 = rows[0].imagen.toString('base64');
-            
+
             return { imagen: imagenBase64 };
         } catch (error) {
             console.error('Error alobtener la imagen:', error);
@@ -55,12 +55,12 @@ class ImagenesController {
 
     // Eliminar la imagen (limpiar el campo de imagen en la base de datos)
     async eliminarImagen(tabla, campoId, id) {
-            try {
+        try {
             // Verificar si el registro existe
             const [registro] = await db.query(`SELECT * FROM ?? WHERE ?? = ?`, [tabla, campoId, id]);
 
             if (registro.length === 0) {
-                return { error: 'No se encontró el registro con el ID proporcionado.'};
+                return { error: 'No se encontró el registro con el ID proporcionado.' };
             }
 
             // Ejecutar la consulta para actualizar el campo imagen a NULL
